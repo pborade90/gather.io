@@ -107,6 +107,12 @@ export async function POST(req: NextRequest) {
                         console.error('Cloudinary upload error:', error);
                         reject(error);
                     } else {
+                        if (!result) {
+                            console.error('Cloudinary upload failed: result is undefined');
+                            reject(new Error('Cloudinary upload failed'));
+                            return;
+                        }
+
                         console.log('Cloudinary upload successful:', {
                             url: result.secure_url,
                             public_id: result.public_id
