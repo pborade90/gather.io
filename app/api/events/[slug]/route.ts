@@ -3,40 +3,40 @@ import { NextRequest, NextResponse } from 'next/server';
 /**
  * Dynamic Event API Route Handler
  * Handles operations for specific events identified by slug
- * GET: Fetch single events by slug with comprehensive error handling
+ * GET: Fetch single event by slug with comprehensive error handling
  */
 
 import connectDB from '@/lib/mongodb';
 import Event from '@/database/event.model';
 
 // Define route parameters type for TypeScript
-type RouteParams = {
+interface RouteContext {
     params: Promise<{
         slug: string;
     }>;
-};
+}
 
 /**
  * GET /api/events/[slug]
- * Fetches a single events by its slug with comprehensive error handling
+ * Fetches a single event by its slug with comprehensive error handling
  * @param req - NextRequest object
- * @param params - Route parameters containing the events slug
- * @returns NextResponse with events data or error message
+ * @param context - Route context containing the event slug
+ * @returns NextResponse with event data or error message
  */
 export async function GET(
     req: NextRequest,
-    { params }: RouteParams
-): Promise<NextResponse> {
+    context: RouteContext
+) {
     try {
         // Connect to database
         await connectDB();
 
         // Extract and validate slug from parameters
-        const { slug } = await params;
+        const { slug } = await context.params;
 
         if (!slug || typeof slug !== 'string' || slug.trim() === '') {
             return NextResponse.json(
-                { message: 'Valid events slug is required' },
+                { message: 'Valid event slug is required' },
                 { status: 400 }
             );
         }
@@ -44,16 +44,21 @@ export async function GET(
         // Sanitize and normalize slug
         const sanitizedSlug = slug.trim().toLowerCase();
 
-        // Query events by slug with lean for better performance
+        console.log('🔍 Fetching event with slug:', sanitizedSlug);
+
+        // Query event by slug with lean for better performance
         const event = await Event.findOne({ slug: sanitizedSlug }).lean();
 
-        // Handle events not found
+        // Handle event not found
         if (!event) {
+            console.log('❌ Event not found for slug:', sanitizedSlug);
             return NextResponse.json(
                 { message: `Event '${sanitizedSlug}' not found` },
                 { status: 404 }
             );
         }
+
+        console.log('✅ Event found:', event.title);
 
         // Return successful response
         return NextResponse.json(
@@ -65,12 +70,13 @@ export async function GET(
         );
     } catch (error) {
         // Comprehensive error handling with appropriate logging
-        console.error(`Error fetching event by slug:`, error);
+        console.error(`❌ Error fetching event by slug:`, error);
 
         // Handle specific error types
         if (error instanceof Error) {
             // Database connection errors
             if (error.message.includes('MONGODB_URI') || error.message.includes('connection')) {
+                console.error('🔌 Database connection error');
                 return NextResponse.json(
                     { message: 'Database connection error' },
                     { status: 503 }
@@ -80,7 +86,7 @@ export async function GET(
             // Return specific error message for known errors
             return NextResponse.json(
                 {
-                    message: 'Failed to fetch events',
+                    message: 'Failed to fetch event',
                     error: process.env.NODE_ENV === 'development' ? error.message : undefined
                 },
                 { status: 500 }
