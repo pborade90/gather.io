@@ -5,9 +5,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7f3a0f57-78cb-4665-bf8d-899b8c7ba59e" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/app/events/[slug]/page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/event/[slug]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/event/[slug]/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api/events/[slug]/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/api/events/[slug]/route.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api/events/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/api/events/route.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/event/[slug]/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/globals.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/BookEvent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/BookEvent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/EventCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/EventCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/ExploreBtn.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ExploreBtn.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/LightRays.css" beforeDir="false" afterPath="$PROJECT_DIR$/components/LightRays.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/LightRays.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LightRays.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/Navbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Navbar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/booking.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/database/booking.model.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/event.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/database/event.model.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/database/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/actions/booking.actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/lib/actions/booking.actions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/actions/event.actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/lib/actions/event.actions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/constants.ts" beforeDir="false" afterPath="$PROJECT_DIR$/lib/constants.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/mongodb.ts" beforeDir="false" afterPath="$PROJECT_DIR$/lib/mongodb.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/next.config.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,7 +59,7 @@
     "RunOnceActivity.git.unshallow": "true",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1": "true",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "create-event",
     "junie.onboarding.icon.badge.shown": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -69,7 +92,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1761454454930</updated>
-      <workItem from="1761454457125" duration="22448000" />
+      <workItem from="1761454457125" duration="38483000" />
     </task>
     <servers />
   </component>

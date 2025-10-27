@@ -1,98 +1,102 @@
-export const events = [
-    {
-        slug: "react-conf-2024",
-        image: "/images/event1.png",
-        title: "React Conf 2024",
-        location: "San Francisco, CA",
-        date: "March 15, 2024",
-        time: "9:00 AM - 6:00 PM",
+/**
+ * Application constants and configuration values
+ * Centralizes magic numbers, default values, and static data
+ */
+
+/**
+ * Event-related constants and default values
+ */
+export const EVENT_CONSTANTS = {
+    MAX_TITLE_LENGTH: 120,
+    MAX_DESCRIPTION_LENGTH: 2000,
+    MAX_OVERVIEW_LENGTH: 500,
+    MAX_AGENDA_ITEMS: 20,
+    MAX_TAGS: 10,
+    DEFAULT_PAGE_SIZE: 12,
+    MAX_FILE_SIZE: 5 * 1024 * 1024, // 5MB
+    ALLOWED_IMAGE_TYPES: ['image/jpeg', 'image/png', 'image/webp'],
+} as const;
+
+/**
+ * Event modes with display labels and icons
+ */
+export const EVENT_MODES = {
+    online: { label: 'Online', icon: '🌐' },
+    offline: { label: 'In-Person', icon: '📍' },
+    hybrid: { label: 'Hybrid', icon: '🔀' },
+} as const;
+
+/**
+ * Common events tags for categorization
+ */
+export const EVENT_TAGS = [
+    'JavaScript',
+    'TypeScript',
+    'React',
+    'Next.js',
+    'Node.js',
+    'Python',
+    'Machine Learning',
+    'AI',
+    'Web Development',
+    'Mobile Development',
+    'DevOps',
+    'Cloud Computing',
+    'Open Source',
+    'Startup',
+    'Career',
+    'Networking',
+    'Workshop',
+    'Conference',
+    'Hackathon',
+    'Meetup',
+] as const;
+
+/**
+ * Date formatting options for consistent display
+ */
+export const DATE_FORMATS = {
+    DISPLAY: { year: 'numeric', month: 'long', day: 'numeric' },
+    SHORT: { year: 'numeric', month: 'short', day: 'numeric' },
+    TIME: { hour: '2-digit', minute: '2-digit' },
+} as const;
+
+/**
+ * API response messages for consistency
+ */
+export const API_MESSAGES = {
+    SUCCESS: {
+        EVENT_CREATED: 'Event created successfully',
+        EVENT_UPDATED: 'Event updated successfully',
+        EVENT_DELETED: 'Event deleted successfully',
+        BOOKING_CREATED: 'Booking confirmed successfully',
+        BOOKING_CANCELLED: 'Booking cancelled successfully',
     },
-    {
-        slug: "nextjs-summit",
-        image: "/images/event2.png",
-        title: "Next.js Summit",
-        location: "Austin, TX",
-        date: "April 22, 2024",
-        time: "10:00 AM - 5:00 PM",
+    ERROR: {
+        NOT_FOUND: 'Resource not found',
+        UNAUTHORIZED: 'Unauthorized access',
+        VALIDATION_ERROR: 'Validation failed',
+        SERVER_ERROR: 'Internal server error',
+        DUPLICATE_BOOKING: 'Already registered for this events',
+        EVENT_FULL: 'Event is at full capacity',
     },
-    {
-        slug: "javascript-world",
-        image: "/images/event3.png",
-        title: "JavaScript World Conference",
-        location: "New York, NY",
-        date: "May 8, 2024",
-        time: "8:30 AM - 7:00 PM",
-    },
-    {
-        slug: "ai-hackathon-2024",
-        image: "/images/event4.png",
-        title: "AI Innovation Hackathon",
-        location: "Seattle, WA",
-        date: "June 14-16, 2024",
-        time: "48 Hours",
-    },
-    {
-        slug: "web3-developer-meetup",
-        image: "/images/event5.png",
-        title: "Web3 Developer Meetup",
-        location: "Miami, FL",
-        date: "July 20, 2024",
-        time: "6:00 PM - 9:00 PM",
-    },
-    {
-        slug: "fullstack-conference",
-        image: "/images/event6.png",
-        title: "Full Stack Conference",
-        location: "Denver, CO",
-        date: "August 12, 2024",
-        time: "9:00 AM - 6:00 PM",
-    },
-    {
-        slug: "devops-unleashed",
-        image: "/images/event1.png",
-        title: "DevOps Unleashed",
-        location: "Chicago, IL",
-        date: "September 5, 2024",
-        time: "8:00 AM - 5:30 PM",
-    },
-    {
-        slug: "mobile-dev-summit",
-        image: "/images/event2.png",
-        title: "Mobile Development Summit",
-        location: "Los Angeles, CA",
-        date: "October 18, 2024",
-        time: "9:30 AM - 6:00 PM",
-    },
-    {
-        slug: "cybersecurity-conference",
-        image: "/images/event3.png",
-        title: "Cybersecurity Conference",
-        location: "Boston, MA",
-        date: "November 2, 2024",
-        time: "8:00 AM - 7:00 PM",
-    },
-    {
-        slug: "data-science-hackathon",
-        image: "/images/event4.png",
-        title: "Data Science Hackathon",
-        location: "San Diego, CA",
-        date: "December 7-9, 2024",
-        time: "72 Hours",
-    },
-    {
-        slug: "cloud-native-meetup",
-        image: "/images/event5.png",
-        title: "Cloud Native Meetup",
-        location: "Portland, OR",
-        date: "January 15, 2025",
-        time: "6:30 PM - 9:00 PM",
-    },
-    {
-        slug: "frontend-masters",
-        image: "/images/event6.png",
-        title: "Frontend Masters Conference",
-        location: "Nashville, TN",
-        date: "February 28, 2025",
-        time: "9:00 AM - 5:00 PM",
-    },
-];
+} as const;
+
+/**
+ * Default values for new events creation
+ */
+export const DEFAULT_EVENT_VALUES = {
+    mode: 'offline' as const,
+    price: 0,
+    capacity: 100,
+    tags: ['Networking'],
+} as const;
+
+export default {
+    EVENT_CONSTANTS,
+    EVENT_MODES,
+    EVENT_TAGS,
+    DATE_FORMATS,
+    API_MESSAGES,
+    DEFAULT_EVENT_VALUES,
+};

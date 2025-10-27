@@ -1,66 +1,91 @@
 import mongoose from 'mongoose';
 
-// Define the connection cache type
-type MongooseCache = {
+/**
+ * MongoDB connection manager with connection pooling and hot reload support
+ * Implements singleton pattern to prevent multiple connections in development
+ */
+
+// Type definition for mongoose connection cache
+interface MongooseCache {
     conn: typeof mongoose | null;
     promise: Promise<typeof mongoose> | null;
-};
+}
 
-// Extend the global object to include our mongoose cache
+// Extend NodeJS global interface for TypeScript support
 declare global {
-    // eslint-disable-next-line no-var
     var mongoose: MongooseCache | undefined;
 }
 
+// Environment variable validation
 const MONGODB_URI = process.env.MONGODB_URI;
+if (!MONGODB_URI) {
+    throw new Error(
+        'Please define the MONGODB_URI environment variable inside .env.local'
+    );
+}
 
-
-// Initialize the cache on the global object to persist across hot reloads in development
-let cached: MongooseCache = global.mongoose || { conn: null, promise: null };
+// Initialize connection cache
+const cached: MongooseCache = global.mongoose || { conn: null, promise: null };
 
 if (!global.mongoose) {
     global.mongoose = cached;
 }
 
 /**
- * Establishes a connection to MongoDB using Mongoose.
- * Caches the connection to prevent multiple connections during development hot reloads.
- * @returns Promise resolving to the Mongoose instance
+ * Establishes and manages MongoDB connection with connection pooling
+ * @returns Promise<typeof mongoose> - Connected mongoose instance
+ * @throws Error if connection fails or MONGODB_URI is missing
  */
 async function connectDB(): Promise<typeof mongoose> {
-    // Return existing connection if available
-    if (cached.conn) {
+    // Return existing connection if available and connected
+    if (cached.conn && cached.conn.connection.readyState === 1) {
         return cached.conn;
     }
 
-    // Return existing connection promise if one is in progress
+    // Create new connection if no pending connection exists
     if (!cached.promise) {
-        // Validate MongoDB URI exists
-        if (!MONGODB_URI) {
-            throw new Error(
-                'Please define the MONGODB_URI environment variable inside .env.local'
-            );
-        }
-        const options = {
-            bufferCommands: false, // Disable Mongoose buffering
+        const options: mongoose.ConnectOptions = {
+            bufferCommands: false, // Disable mongoose buffering
+            maxPoolSize: 10, // Maximum number of sockets in connection pool
+            serverSelectionTimeoutMS: 5000, // Timeout for server selection
+            socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity
         };
 
-        // Create a new connection promise
-        cached.promise = mongoose.connect(MONGODB_URI!, options).then((mongoose) => {
-            return mongoose;
-        });
+        cached.promise = mongoose.connect(MONGODB_URI!, options)
+            .then((mongooseInstance) => {
+                console.log('✅ MongoDB connected successfully');
+                return mongooseInstance;
+            })
+            .catch((error) => {
+                // Reset promise on connection failure to allow retry
+                cached.promise = null;
+                console.error('❌ MongoDB connection error:', error);
+                throw error;
+            });
     }
 
     try {
-        // Wait for the connection to establish
+        // Wait for connection to establish
         cached.conn = await cached.promise;
     } catch (error) {
-        // Reset promise on error to allow retry
         cached.promise = null;
         throw error;
     }
 
     return cached.conn;
 }
+
+// Connection events handlers for better error handling
+mongoose.connection.on('error', (err) => {
+    console.error('MongoDB connection error:', err);
+});
+
+mongoose.connection.on('disconnected', () => {
+    console.log('MongoDB disconnected');
+});
+
+mongoose.connection.on('reconnected', () => {
+    console.log('MongoDB reconnected');
+});
 
 export default connectDB;
