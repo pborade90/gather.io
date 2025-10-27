@@ -7,7 +7,11 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "build-pwa": "next build && next export"
+    "build-pwa": "next build && next export",
+    "build:netlify": "next build"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",

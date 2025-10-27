@@ -27,6 +27,12 @@ const nextConfig = {
 
     compress: true,
 
+    // Netlify specific: Output standalone for better performance
+    output: 'standalone',
+
+    // Enable SWC minification for faster builds
+    swcMinify: true,
+
     async rewrites() {
         return [
             {
@@ -41,9 +47,6 @@ const nextConfig = {
     },
 
     skipTrailingSlashRedirect: true,
-
-    // Note: The experimental.appDir is no longer needed in Next.js 14
-    // as the App Router is stable now
 };
 
 module.exports = withPWA(nextConfig);
