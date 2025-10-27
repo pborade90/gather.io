@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "build-pwa": "next build && next export"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
@@ -16,6 +17,7 @@
     "lucide-react": "^0.294.0",
     "mongoose": "^8.0.0",
     "next": "14.0.0",
+    "next-pwa": "^5.6.0",
     "ogl": "^0.0.57",
     "posthog-js": "^1.77.2",
     "react": "^18.2.0",

@@ -4,6 +4,9 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import LightRays from "@/components/LightRays";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import PWA from '@/components/PWA';
+import OfflineIndicator from '@/components/OfflineIndicator';
+import InstallPrompt from '@/components/InstallPrompt';
 
 const inter = Inter({
     subsets: ["latin"],
@@ -16,6 +19,33 @@ export const metadata: Metadata = {
         template: "%s | Gather.io"
     },
     description: "Discover and create amazing events. Connect with communities and grow together.",
+    manifest: "/manifest.json",
+    themeColor: "#0ea5e9",
+    authors: [{ name: "Gather.io Team" }],
+    viewport: {
+        width: "device-width",
+        initialScale: 1,
+        maximumScale: 1,
+    },
+    appleWebApp: {
+        capable: true,
+        statusBarStyle: "default",
+        title: "Gather.io",
+    },
+    formatDetection: {
+        telephone: false,
+    },
+    openGraph: {
+        type: "website",
+        siteName: "Gather.io",
+        title: "Gather.io - Connect Through Events",
+        description: "Discover and create amazing developer events.",
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "Gather.io - Connect Through Events",
+        description: "Discover and create amazing developer events.",
+    },
 };
 
 export default function RootLayout({
@@ -25,7 +55,44 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en" className={inter.className}>
+        <head>
+            {/* PWA meta tags */}
+            <link rel="icon" href="/favicon.ico" />
+            <link rel="apple-touch-icon" href="/icons/ios/16.png" />
+            <link rel="apple-touch-icon" href="/icons/ios/20.png" />
+            <link rel="apple-touch-icon" href="/icons/ios/29.png" />
+            <link rel="apple-touch-icon" href="/icons/ios/32.png" />
+            <link rel="apple-touch-icon" href="/icons/ios/40.png" />
+            <link rel="apple-touch-icon" href="/icons/ios/50.png" />
+            <link rel="apple-touch-icon" href="/icons/ios/57.png" />
+            <link rel="apple-touch-icon" href="/icons/ios/58.png" />
+            <link rel="apple-touch-icon" href="/icons/ios/60.png" />
+            <link rel="apple-touch-icon" href="/icons/ios/64.png" />
+            <link rel="apple-touch-icon" href="/icons/ios/72.png" />
+            <link rel="apple-touch-icon" href="/icons/ios/76.png" />
+            <link rel="apple-touch-icon" href="/icons/ios/80.png" />
+            <link rel="apple-touch-icon" href="/icons/ios/87.png" />
+            <link rel="apple-touch-icon" href="/icons/ios/100.png" />
+            <link rel="apple-touch-icon" href="/icons/ios/114.png" />
+            <link rel="apple-touch-icon" href="/icons/ios/120.png" />
+            <link rel="apple-touch-icon" href="/icons/ios/128.png" />
+            <link rel="apple-touch-icon" href="/icons/ios/144.png" />
+            <link rel="apple-touch-icon" href="/icons/ios/152.png" />
+            <link rel="apple-touch-icon" href="/icons/ios/167.png" />
+            <link rel="apple-touch-icon" href="/icons/ios/180.png" />
+            <link rel="apple-touch-icon" href="/icons/ios/192.png" />
+            <link rel="apple-touch-icon" href="/icons/ios/256.png" />
+            <link rel="apple-touch-icon" href="/icons/ios/512.png" />
+            <link rel="apple-touch-icon" href="/icons/ios/1024.png" />
+            <meta name="theme-color" content="#0ea5e9" />
+            <meta name="apple-mobile-web-app-capable" content="yes" />
+            <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+            <meta name="apple-mobile-web-app-title" content="Gather.io" />
+        </head>
         <body className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white antialiased">
+        <PWA />
+        <OfflineIndicator />
+        <InstallPrompt />
         {/* Background Effects with LightRays */}
         <div className="fixed inset-0 -z-10 overflow-hidden">
             <LightRays

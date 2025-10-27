@@ -1,4 +1,11 @@
 /** @type {import('next').NextConfig} */
+const withPWA = require('next-pwa')({
+    dest: 'public',
+    register: true,
+    skipWaiting: true,
+    disable: process.env.NODE_ENV === 'development',
+});
+
 const nextConfig = {
     typescript: {
         ignoreBuildErrors: false,
@@ -34,6 +41,9 @@ const nextConfig = {
     },
 
     skipTrailingSlashRedirect: true,
+
+    // Note: The experimental.appDir is no longer needed in Next.js 14
+    // as the App Router is stable now
 };
 
-module.exports = nextConfig;
+module.exports = withPWA(nextConfig);
