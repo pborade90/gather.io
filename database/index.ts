@@ -1,7 +1,7 @@
-// Database models exports
-export { default as Event } from './event.model';
-export { default as Booking } from './booking.model';
+/**
+ * Centralized database exports for cleaner imports throughout the application
+ * Provides type-safe access to models and their interfaces
+ */
 
-// TypeScript interfaces exports
-export type { IEvent } from './event.model';
-export type { IBooking } from './booking.model';
+export { default as Event, type IEvent } from './event.model';
+export { default as Booking, type IBooking } from './booking.model';
