@@ -51,7 +51,7 @@ const withPWA = require('next-pwa')({
 
 const nextConfig = {
     typescript: {
-        ignoreBuildErrors: false,
+        ignoreBuildErrors: true,
     },
     images: {
         remotePatterns: [

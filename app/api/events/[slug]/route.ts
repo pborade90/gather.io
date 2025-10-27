@@ -16,6 +16,31 @@ interface RouteContext {
     }>;
 }
 
+// Define a simple interface for the event data
+interface EventData {
+    _id: string;
+    title: string;
+    slug: string;
+    description: string;
+    overview: string;
+    image: string;
+    venue: string;
+    location: string;
+    date: string;
+    time: string;
+    mode: string;
+    audience: string;
+    organizer: string;
+    tags: string[];
+    agenda: string[];
+    price?: number;
+    capacity?: number;
+    registrationUrl?: string;
+    createdAt: string;
+    updatedAt: string;
+    __v: number;
+}
+
 /**
  * GET /api/events/[slug]
  * Fetches a single event by its slug with comprehensive error handling
@@ -47,7 +72,7 @@ export async function GET(
         console.log('🔍 Fetching event with slug:', sanitizedSlug);
 
         // Query event by slug with lean for better performance
-        const event = await Event.findOne({ slug: sanitizedSlug }).lean();
+        const event = await Event.findOne({ slug: sanitizedSlug }).lean() as EventData | null;
 
         // Handle event not found
         if (!event) {
